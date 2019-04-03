@@ -1,14 +1,14 @@
-# start project
+## start project
 >> django-admin startproject mysite
 
-# Run on custom port
+### Run on custom port
 >> python manage.py runserver 8080
 
-# startapp and startproject is different - project is web of multiple apps etc.
-# start app
+### startapp and startproject is different - project is web of multiple apps etc.
+### start app
 >> python manage.py startapp polls
 
-# You should always use include() when you include other URL patterns. admin.site.urls is the only exception to this.
+### You should always use include() when you include other URL patterns. admin.site.urls is the only exception to this.
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
