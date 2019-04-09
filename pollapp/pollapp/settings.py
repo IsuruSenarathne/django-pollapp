@@ -55,7 +55,7 @@ ROOT_URLCONF = 'pollapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +67,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'pollapp.wsgi.application'
 
@@ -119,3 +120,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    r"C:\Users\Acer\Desktop\Projects\Google Cloud App\APP\django-pollapp\pollapp\polls\static\polls"
+]
+
+#     r'C:\Users\Acer\Desktop\Projects\Google Cloud App\APP\django-pollapp\pollapp\polls\static',
+#     )
+
+
+# TEMPLATE_DIRS = (
+#    r'C:\Users\Acer\Desktop\Projects\Google Cloud App\APP\django-pollapp\pollapp\polls\templates',
+    # )
