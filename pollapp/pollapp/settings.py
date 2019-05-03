@@ -132,6 +132,6 @@ STATICFILES_DIRS = [
 #     )
 
 
-# TEMPLATE_DIRS = (
+# TEMPLATE_DIRS = ( 
 #    r'C:\Users\Acer\Desktop\Projects\Google Cloud App\APP\django-pollapp\pollapp\polls\templates',
     # )

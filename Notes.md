@@ -116,4 +116,100 @@ INSTALLED_APPS = [
 
     MORE: https://docs.djangoproject.com/en/2.2/intro/tutorial02/#playing-with-the-api
 
+#### It’s important to add __str__() methods to your models, not only for your own convenience when dealing with the interactive prompt, but also because objects’ representations are used throughout Django’s automatically-generated admin.
 
+### Handling time zones: https://docs.djangoproject.com/en/2.2/topics/i18n/timezones/
+
+### Django queries:
+```
+>>> from django.utils import timezone
+>>> q = Question(question_text="What's new?", pub_date=timezone.now())
+>>> q.save()
+>>> q.pub_date
+>>> Question.objects.all()
+
+>>> current_year = timezone.now().year
+>>> Question.objects.filter(id=1)
+>>> Question.objects.filter(question_text__startswith='What')
+>>> Question.objects.get(pub_date__year=current_year)
+>>> q.choice_set.all()
+```
+#### By primary key
+```
+>>> Question.objects.get(pk=1) 
+```
+## Awesomness is we can use quesion object to create related choice record
+```
+ q = Question.objects.get(pk=1)
+ ```
+#### Display any choices from the related object set -- none so far.
+```
+>>> q.choice_set.all()
+```
+#### Create choices.
+```
+>>> q.choice_set.create(choice_text='Not much', votes=0)
+```
+
+### Accessing related objects
+https://docs.djangoproject.com/en/2.2/ref/models/relations/
+
+###  double underscores to perform field lookups via the API, 
+https://docs.djangoproject.com/en/2.2/topics/db/queries/#field-lookups-intro
+
+### Database API reference
+https://docs.djangoproject.com/en/2.2/topics/db/queries/
+
+
+## Creating an admin user
+```
+$ python manage.py createsuperuser
+
+```
+
+### URLS more -  URL patternfor example: /newsarchive/<year>/<month>/.
+https://docs.djangoproject.com/en/2.2/topics/http/urls/
+
+###  Some controlled coupling is introduced in the django.shortcuts module.
+### ex: get_object_or_404()
+https://docs.djangoproject.com/en/2.2/topics/http/shortcuts/#module-django.shortcuts
+
+
+### templating 
+https://docs.djangoproject.com/en/2.2/topics/templates/
+
+
+### the 'name' value as called by the {% url %} template tag
+
+
+```
+path('<int:question_id>/', views.detail, name='detail')
+
+<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+```
+as 'detail' function being called you can change the url from urls.py- no effect
+
+### if multiple app are available such as polls app, following is the way it identify 
+### which fucntion to use in app
+APP NAME = polls       FUCNTION_NAME = details
+```
+<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+
+```
+### after adding above add following to mysite.app_name.urls.py
+### ex: pollapp.polls.urs.py
+```
+app_name = 'polls'
+```
+
+### DONT FORGET {% csrf_token %} on forms 
+
+### # Always return an HttpResponseRedirect after successfully dealing
+### with POST data. This prevents data from being posted twice if a
+### user hits the Back button.
+ try:
+ except:
+ else:
+    selected_choice.votes += 1
+    selected_choice.save()  
+    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))  
